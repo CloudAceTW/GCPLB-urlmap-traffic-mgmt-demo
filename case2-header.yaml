@@ -1,0 +1,42 @@
+name: <LB_NAME>
+defaultService: global/backendServices/blackhole
+hostRules:
+- hosts:
+  - 'xxx.endpoints.xxxxx.cloud.goog'
+  pathMatcher: normal-svc
+- hosts:
+  - '34.xx.xx.xx'
+  pathMatcher: blackhole-svc
+pathMatchers:
+- defaultService: global/backendServices/blackhole
+  name: normal-svc
+  routeRules:
+  - matchRules:
+    - prefixMatch: /api/v1/
+      headerMatches:
+      - headerName: target
+        exactMatch: v2
+    priority: 50
+    routeAction:
+      weightedBackendServices:
+      - backendService: global/backendServices/version-2
+        weight: 100
+  - matchRules:
+    - prefixMatch: /api/v1/
+    priority: 100
+    routeAction:
+      weightedBackendServices:
+      - backendService: global/backendServices/version-1
+        weight: 80
+      - backendService: global/backendServices/version-2
+        weight: 20
+- defaultService: global/backendServices/blackhole
+  name: blackhole-svc
+  routeRules:
+  - matchRules:
+    - prefixMatch: /
+    priority: 100000
+    routeAction:
+      weightedBackendServices:
+      - backendService: global/backendServices/blackhole
+        weight: 100
