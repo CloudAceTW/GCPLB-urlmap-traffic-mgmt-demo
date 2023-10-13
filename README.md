@@ -1,4 +1,4 @@
-# CloudAce Blog `《Load Balancing 教學：3 大方法實現流量管理》` YAMLs
+# CloudAce Blog [《Load Balancing 教學：3 大方法實現流量管理》](https://blog.cloud-ace.tw/networking-website/load-balance/cloud-load-balancing-traffic-management-tutorial/) YAMLs
 
 blog 文章的 yaml 範例檔：
 - Cloud Load Balancing 流量管理教學一：權重分配
